@@ -3,6 +3,7 @@ import {Container, FormContainer, InputContainer} from './styles';
 import {Input, Button} from 'react-native-elements';
 import api from '../../services/api';
 import {useNavigation} from '@react-navigation/core';
+import Toast from 'react-native-toast-message';
 
 const Register: React.FC = () => {
   const [cpf, setCPF] = useState('');
@@ -19,8 +20,20 @@ const Register: React.FC = () => {
       try {
         await api.post('/customers', {cpf});
         navigation.goBack();
+        Toast.show({
+          type: 'success',
+          text1: 'Sucesso',
+          text2: 'CPF cadastrado com sucesso',
+          position: 'bottom',
+        });
       } catch (error) {
         console.log('esse é o erro => ', error);
+        Toast.show({
+          type: 'error',
+          text1: 'Erro',
+          text2: 'Ocorreu um erro ao cadastrar CPF',
+          position: 'top',
+        });
       }
     }
   }, [cpf, navigation]);
