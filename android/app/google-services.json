@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1057330796206",
+    "project_id": "restaurante-tech-983df",
+    "storage_bucket": "restaurante-tech-983df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057330796206:android:6bbfa084242521fc47bf3f",
+        "android_client_info": {
+          "package_name": "com.tech_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057330796206-va79rfc3nk5a2qun1pf852cm2gq45bfd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlyEU2btb63MTKUBrQJ1nUPI-FC1c1I-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057330796206-va79rfc3nk5a2qun1pf852cm2gq45bfd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

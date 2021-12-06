@@ -10,6 +10,7 @@ interface CartContextData {
   removeProduct(product: ProductDTO): void;
   decrementProduct(product: ProductDTO): void;
   products: CartProduct[];
+  clear(): void;
 }
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -47,9 +48,13 @@ const Cart: React.FC = ({children}) => {
     });
   }, []);
 
+  const clear = useCallback(() => {
+    setProducts([]);
+  }, []);
+
   return (
     <CartContext.Provider
-      value={{products, addProduct, removeProduct, decrementProduct}}>
+      value={{products, addProduct, removeProduct, decrementProduct, clear}}>
       {children}
     </CartContext.Provider>
   );
@@ -61,7 +66,7 @@ export function useCart(): CartContextData {
   const context = useContext(CartContext);
 
   if (!context) {
-    throw new Error('useCart must be within a ToastContextProvider');
+    throw new Error('useCart must be within a CartContextProvider');
   }
 
   return context;
