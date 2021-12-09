@@ -45,11 +45,13 @@ const Products: React.FC = () => {
         .ref(`/NewOrders/${result.data.id}`)
         .set({
           id: result.data.id,
-          ready: false,
+          ready: '',
         })
         .then(() => console.log('Data set.'));
 
       addOrder(result.data.id);
+
+      navigation.goBack();
 
       Toast.show({
         text1: 'Sucesso',
@@ -61,7 +63,7 @@ const Products: React.FC = () => {
       Toast.show({
         text1: 'Error',
         text2: 'Ocorreu um erro ao realizar pedido',
-        type: 'success',
+        type: 'error',
       });
     }
   }, [addOrder, clear, cpf, products]);

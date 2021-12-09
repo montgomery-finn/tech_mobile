@@ -1,6 +1,7 @@
 import React, {createContext, useCallback, useContext, useState} from 'react';
 import database from '@react-native-firebase/database';
-import {Overlay, Text} from 'react-native-elements';
+import {Overlay} from 'react-native-elements';
+import OrderNotification from './orderNotification';
 
 interface OrderContextData {
   addOrder(orderId: string): void;
@@ -12,20 +13,22 @@ const Order: React.FC = ({children}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const addOrder = useCallback((id: string) => {
-    try {
-      database()
-        .ref(`/NewOrders/${id}`)
-        .on('value', snapshot => {
-          if (snapshot) {
-            console.log('aaaaaaaaaaa');
-            const {ready} = snapshot.val();
+    const db = database();
+    const newOrdersRef = db.ref('/NewOrders');
 
-            if (ready) {
-              setIsVisible(true);
-            }
-          }
-        });
-    } catch {}
+    newOrdersRef.on('child_changed', snapshot => {
+      const childChanged = snapshot.val();
+
+      if (childChanged.id === id) {
+        if (childChanged.ready) {
+          setIsVisible(true);
+        }
+      }
+    });
+  }, []);
+
+  const handleOnClose = useCallback(() => {
+    setIsVisible(false);
   }, []);
 
   return (
@@ -33,11 +36,15 @@ const Order: React.FC = ({children}) => {
       <>
         <Overlay
           isVisible={isVisible}
-          onBackdropPress={() => setIsVisible(false)}>
-          <Text>
-            O seu pedido está pronto. Por favor, dirija-se ao caixa para
-            retirá-lo!
-          </Text>
+          onBackdropPress={handleOnClose}
+          overlayStyle={{
+            padding: 0,
+            flex: 1,
+            backgroundColor: 'transparent',
+            shadowColor: 'transparent',
+            justifyContent: 'center',
+          }}>
+          <OrderNotification handleOnClose={handleOnClose} />
         </Overlay>
         {children}
       </>
