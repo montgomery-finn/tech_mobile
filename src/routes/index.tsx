@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Products from '../pages/products';
 import Cart from '../pages/cart';
 import Register from '../pages/register';
+import Points from '../pages/points';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,13 +17,20 @@ const App: React.FC = () => {
       />
       <Stack.Screen
         name="Cart"
+        options={{
+          headerTitle: 'Carrinho de compras',
+        }}
         component={Cart}
-        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Register"
         component={Register}
-        options={{headerShown: false}}
+        options={{headerTitle: 'Cadastrar-se'}}
+      />
+      <Stack.Screen
+        name="Points"
+        options={{headerTitle: 'Sistema de pontos'}}
+        component={Points}
       />
     </Stack.Navigator>
   );

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import api from '../../services/api';
-import {Container, ItemsContainer} from './styles';
+import {Container, ItemsContainer, TopButtonsContainer} from './styles';
 import ProductDTO from '../../DTOs/productDTO';
 import {ScrollView, TouchableOpacity} from 'react-native';
 import Item from './item';
 import {Badge, Header} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useCart} from '../../hooks/cart';
 import {useNavigation} from '@react-navigation/native';
 
@@ -39,18 +39,27 @@ const Products: React.FC = () => {
           style: {color: '#fff', fontSize: 22},
         }}
         rightComponent={
-          <TouchableOpacity
-            style={{padding: 10}}
-            onPress={() => {
-              navigation.navigate('Cart');
-            }}>
-            <Icon name="shopping-cart" size={30} color="#fff" />
-            <Badge
-              status="error"
-              value={cartProducts.length}
-              containerStyle={{position: 'absolute', top: 2, right: 0}}
-            />
-          </TouchableOpacity>
+          <TopButtonsContainer>
+            <TouchableOpacity
+              style={{padding: 10, marginRight: 10}}
+              onPress={() => {
+                navigation.navigate('Points');
+              }}>
+              <Icon name="donate" size={30} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{padding: 10}}
+              onPress={() => {
+                navigation.navigate('Cart');
+              }}>
+              <Icon name="shopping-cart" size={30} color="#fff" />
+              <Badge
+                status="error"
+                value={cartProducts.length}
+                containerStyle={{position: 'absolute', top: 2, right: 0}}
+              />
+            </TouchableOpacity>
+          </TopButtonsContainer>
         }
       />
       <ScrollView>

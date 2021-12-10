@@ -14,3 +14,11 @@ export const FormContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
+
+export const Info = styled.Text`
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-right: 250px;
+  margin-left: 250px;
+`;

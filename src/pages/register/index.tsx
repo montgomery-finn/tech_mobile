@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {Container, FormContainer, InputContainer} from './styles';
+import {Container, FormContainer, InputContainer, Info} from './styles';
 import {Input, Button} from 'react-native-elements';
 import api from '../../services/api';
 import {useNavigation} from '@react-navigation/core';
@@ -40,6 +40,10 @@ const Register: React.FC = () => {
 
   return (
     <Container>
+      <Info>
+        No sistema de pontos, cada compra que você faz no seu CPF gera um ponto,
+        e você pode trocar os pontos por produtos
+      </Info>
       <FormContainer>
         <InputContainer>
           <Input

@@ -7,3 +7,7 @@ export const Container = styled.View`
 export const ItemsContainer = styled.View`
   flex-direction: row;
 `;
+
+export const TopButtonsContainer = styled.View`
+  flex-direction: row;
+`;

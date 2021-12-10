@@ -9,7 +9,7 @@ import {
 } from './styles';
 import {ScrollView, TouchableOpacity} from 'react-native';
 import Item from './item';
-import {Header, Button, Input} from 'react-native-elements';
+import {Button, Input} from 'react-native-elements';
 import {useCart} from '../../hooks/cart';
 import {useNavigation} from '@react-navigation/core';
 import api from '../../services/api';
@@ -66,18 +66,10 @@ const Products: React.FC = () => {
         type: 'error',
       });
     }
-  }, [addOrder, clear, cpf, products]);
+  }, [addOrder, clear, cpf, navigation, products]);
 
   return (
     <Container>
-      <Header
-        containerStyle={{justifyContent: 'center'}}
-        placement="left"
-        centerComponent={{
-          text: 'Restaurante Tech',
-          style: {color: '#fff', fontSize: 22},
-        }}
-      />
       <Content>
         {products.length === 0 ? (
           <Alert>Adicione produtos ao carrinho e eles aparecerão aqui</Alert>
