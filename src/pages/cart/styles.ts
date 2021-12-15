@@ -10,6 +10,7 @@ export const Content = styled.View`
 
 export const ItemsContainer = styled.View`
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const ButtonsContainer = styled.View`

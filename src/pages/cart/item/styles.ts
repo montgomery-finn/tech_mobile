@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import {
   Card as ElementCard,
   Image as ElementImage,
@@ -22,4 +23,10 @@ export const InfoContainer = styled.View`
 export const Title = styled.Text`
   font-weight: bold;
   color: #000;
+`;
+
+export const QuantityContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-vertical: 5px;
 `;
