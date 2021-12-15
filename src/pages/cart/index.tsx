@@ -33,36 +33,40 @@ const Products: React.FC = () => {
 
   const handleSubmit = useCallback(async () => {
     try {
-      const result = await api.post<ResponseDTO>('orders', {
-        cpf,
-        products: products.map(p => ({
-          productId: p.id,
-          quantity: p.quantity,
-        })),
-      });
+      if (cpf && cpf.length !== 11) {
+        setCPFError('O CPF precisa ter 11 dígitos');
+      } else {
+        const result = await api.post<ResponseDTO>('orders', {
+          cpf,
+          products: products.map(p => ({
+            productId: p.id,
+            quantity: p.quantity,
+          })),
+        });
 
-      database()
-        .ref(`/NewOrders/${result.data.id}`)
-        .set({
-          id: result.data.id,
-          ready: '',
-        })
-        .then(() => console.log('Data set.'));
+        database()
+          .ref(`/NewOrders/${result.data.id}`)
+          .set({
+            id: result.data.id,
+            ready: '',
+          })
+          .then(() => console.log('Data set.'));
 
-      addOrder(result.data.id);
+        addOrder(result.data.id);
 
-      navigation.goBack();
+        navigation.goBack();
 
-      Toast.show({
-        text1: 'Sucesso',
-        text2: 'Pedido efetuado com sucesso',
-        type: 'success',
-      });
-      clear();
-    } catch {
+        Toast.show({
+          text1: 'Sucesso',
+          text2: 'Pedido efetuado com sucesso',
+          type: 'success',
+        });
+        clear();
+      }
+    } catch (error) {
       Toast.show({
         text1: 'Error',
-        text2: 'Ocorreu um erro ao realizar pedido',
+        text2: error?.response?.data,
         type: 'error',
       });
     }

@@ -13,7 +13,7 @@ const Item: React.FC<ItemProps> = ({product}) => {
   const {addProduct} = useCart();
 
   return (
-    <Card key={product.id} containerStyle={{width: 300, padding: 0}}>
+    <Card key={product.id} containerStyle={{width: 290, padding: 0}}>
       <Image
         source={{
           uri: `http://localhost:28464/image/${product.fileName}`,

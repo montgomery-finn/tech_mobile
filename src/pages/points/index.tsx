@@ -4,6 +4,7 @@ import {Container, Info, TypeCPF, PointsText, Register} from './styles';
 import api from '../../services/api';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 const Points: React.FC = () => {
   const [cpf, setCPF] = useState('');
@@ -12,9 +13,22 @@ const Points: React.FC = () => {
   const [points, setPoints] = useState<number>();
 
   const handleSubmit = useCallback(async () => {
-    const response = await api.get<number>(`customers/points/${cpf}`);
+    try {
+      if (cpf.length !== 11) {
+        setCPFError('O CPF precisa ter 11 dígitos');
+      } else {
+        setCPFError('');
+        const response = await api.get<number>(`customers/points/${cpf}`);
 
-    setPoints(response.data);
+        setPoints(response.data);
+      }
+    } catch (error) {
+      Toast.show({
+        text1: 'Error',
+        text2: error?.response?.data,
+        type: 'error',
+      });
+    }
   }, [cpf]);
 
   const navigation = useNavigation();
